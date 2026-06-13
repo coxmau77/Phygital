@@ -92,6 +92,43 @@ body {
   transform: scale(0.95);
 }
 
+.zoom-reset-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background-color: color-mix(in oklch, var(--light-clr) 15%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--light-clr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.25s, transform 0.2s;
+  z-index: 10;
+  box-shadow: 0 4px 16px color-mix(in oklch, var(--dark-clr) 30%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zoom-reset-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.zoom-reset-btn:hover {
+  background-color: color-mix(in oklch, var(--light-clr) 25%, transparent);
+  transform: scale(1.05);
+}
+
+.zoom-reset-btn:active {
+  transform: scale(0.95);
+}
+
 dialog {
   background-color: light-dark(var(--light-clr), var(--dark-clr));
   color: light-dark(var(--dark-clr), var(--light-clr));
