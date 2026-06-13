@@ -1,17 +1,3 @@
-const zoomResetBtn = document.getElementById('zoom-reset-btn');
-
-function checkZoom() {
-  if (window.visualViewport) {
-    zoomResetBtn.classList.toggle('visible', visualViewport.scale > 1.05);
-  }
-}
-
-if (window.visualViewport) {
-  visualViewport.addEventListener('resize', checkZoom);
-}
-
-zoomResetBtn.addEventListener('click', () => window.location.reload());
-
 const openBtn = document.getElementById('open-menu-btn');
 const closeBtn = document.getElementById('close-dialog-btn');
 const dialog = document.getElementById('interaction-dialog');
