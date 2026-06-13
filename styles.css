@@ -1,17 +1,271 @@
 :root {
-  /* Paleta de colores requerida */
-  --main-clr: tomato;
-  --light-clr: #ffffff;
-  --dark-clr: #000000;
+  /* variables color (clr) */
+  /* --main-clr: #8d5bc1; */
+  --main-clr: oklch(57.087% 0.15712 304.533);
 
-  /* Configuración nativa para soportar ambos esquemas */
+/* OSCURO: Forzamos la luz al 20% y bajamos un poco el croma (C) para que no sature */
+  --dark-clr: oklch(from var(--main-clr) 20% calc(c * 0.8) h);
+
+  /* CLARO: Forzamos la luz al 97% y bajamos mucho el croma para obtener un pastel limpio */
+  --light-clr: oklch(from var(--main-clr) 97% calc(c * 0.15) h);
+
   color-scheme: light dark;
+  text-wrap: balance;
+  background-color: light-dark(var(--light-clr), var(--dark-clr));
 }
 
-/* Aplicación del color dinámico en el Dialog */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  
+  /* El fondo del sitio cambiará automáticamente según el esquema */
+  background-color: light-dark(var(--light-clr), var(--dark-clr));
+  color: light-dark(var(--dark-clr), var(--light-clr));
+}
+
+#app-container {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-clr);
+}
+
+.canvas-container {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#phygital-pic {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background-color: color-mix(in oklch, var(--light-clr) 15%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--light-clr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.25s,
+    transform 0.2s;
+  z-index: 10;
+  box-shadow: 0 4px 16px color-mix(in oklch, var(--dark-clr) 30%, transparent);
+}
+
+.floating-btn:hover {
+  background-color: color-mix(in oklch, var(--light-clr) 25%, transparent);
+  transform: scale(1.05);
+}
+
+.floating-btn:active {
+  transform: scale(0.95);
+}
+
 dialog {
   background-color: light-dark(var(--light-clr), var(--dark-clr));
   color: light-dark(var(--dark-clr), var(--light-clr));
-  /* Transición suave para el cambio de modo */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  border: none;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 360px;
+  width: calc(100% - 32px);
+  box-shadow: 0 8px 32px color-mix(in oklch, var(--dark-clr) 30%, transparent);
+}
+
+dialog::backdrop {
+  background-color: color-mix(in oklch, var(--dark-clr) 50%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#close-dialog-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: light-dark(var(--dark-clr), var(--light-clr));
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+#close-dialog-btn:hover {
+  background-color: light-dark(
+    color-mix(in oklch, var(--dark-clr) 8%, transparent),
+    color-mix(in oklch, var(--light-clr) 8%, transparent)
+  );
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 8px;
+  border: 1px solid light-dark(
+    color-mix(in oklch, var(--dark-clr) 12%, transparent),
+    color-mix(in oklch, var(--light-clr) 12%, transparent)
+  );
+  border-radius: 12px;
+  background: none;
+  color: light-dark(var(--dark-clr), var(--light-clr));
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+  font-size: 0.75rem;
+}
+
+.social-btn:hover {
+  background-color: light-dark(
+    color-mix(in oklch, var(--dark-clr) 6%, transparent),
+    color-mix(in oklch, var(--light-clr) 6%, transparent)
+  );
+  transform: translateY(-2px);
+}
+
+.social-btn:active {
+  transform: translateY(0);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid light-dark(
+    color-mix(in oklch, var(--dark-clr) 12%, transparent),
+    color-mix(in oklch, var(--light-clr) 12%, transparent)
+  );
+  margin: 16px 0;
+}
+
+.theme-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+#theme-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: color-mix(in oklch, var(--dark-clr) 25%, var(--light-clr));
+  transition: 0.3s;
+  border-radius: 26px;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--light-clr);
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--main-clr);
+}
+
+input:checked + .slider::before {
+  transform: translateX(22px);
+}
+
+.promo-btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--main-clr);
+  color: var(--light-clr);
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition:
+    opacity 0.2s,
+    transform 0.15s;
+}
+
+.promo-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.promo-btn:active {
+  transform: translateY(0);
 }
