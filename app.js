@@ -1,5 +1,13 @@
-const R2_BASE = 'https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev';
-const IMG_EXT = '.jpg';
+// const R2_BASE = 'https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev';
+const R2_BASE = 'https://pub-aed658d5b76840bcb6f152b24c3994e4.r2.dev';
+const R2_IMG_EXT = '.jpeg';
+
+function buildR2Url(fotoParam) {
+  if (!fotoParam || typeof fotoParam !== 'string') return null;
+  const safe = fotoParam.replace(/\.\.\//g, '').replace(/^\/+/, '').trim();
+  if (!safe) return null;
+  return `${R2_BASE}/${encodeURIComponent(safe)}${R2_IMG_EXT}`;
+}
 
 const params = new URLSearchParams(window.location.search);
 const foto = params.get('foto');
@@ -11,13 +19,18 @@ const dialog = document.getElementById('interaction-dialog');
 const toggle = document.getElementById('dark-mode-toggle');
 const themeLabel = document.getElementById('theme-label');
 
-if (foto) {
-  img.src = `${R2_BASE}/${encodeURIComponent(foto)}${IMG_EXT}`;
+const imgUrl = buildR2Url(foto);
+
+if (imgUrl) {
+  img.src = imgUrl;
+  img.onload = () => img.removeAttribute('style');
   img.onerror = () => {
     img.alt = 'No se pudo cargar la imagen';
+    img.style.filter = 'blur(2px)';
   };
 } else {
   img.alt = 'Parámetro faltante';
+  img.style.filter = 'blur(2px)';
 }
 
 openBtn.addEventListener('click', () => dialog.showModal());
