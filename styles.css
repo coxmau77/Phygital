@@ -1,7 +1,8 @@
 :root {
   /* variables color (clr) */
   /* --main-clr: #8d5bc1; */
-  --main-clr: oklch(57.087% 0.15712 304.533);
+  /* --main-clr: #03a9f4; */
+  --main-clr: oklch(69.912% 0.15707 239.019); /* Azul vibrante */
 
 /* OSCURO: Forzamos la luz al 20% y bajamos un poco el croma (C) para que no sature */
   --dark-clr: oklch(from var(--main-clr) 20% calc(c * 0.8) h);
