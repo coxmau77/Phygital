@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phygital Experience</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+  <main id="app-container">
+    <figure class="canvas-container">
+      <img id="phygital-pic" src="" alt="Tu recuerdo Phygital" loading="eager">
+    </figure>
+
+    <button id="open-menu-btn" aria-label="Compartir y opciones" class="floating-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+      </svg>
+    </button>
+  </main>
+
+  <dialog id="interaction-dialog">
+    <div class="dialog-header">
+      <h2>Compartir</h2>
+      <button id="close-dialog-btn" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <div class="social-grid">
+      <button class="social-btn" aria-label="Compartir por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.948h.003c4.368 0 7.926-3.559 7.93-7.93a7.9 7.9 0 0 0-2.326-5.592m-5.607 11.366A6.6 6.6 0 0 1 4.7 12.878l-.252-.15-2.516.665.677-2.47-.165-.263a6.55 6.55 0 0 1-1.017-3.46c0-3.6 2.945-6.54 6.552-6.54 1.745 0 3.387.68 4.617 1.913a6.56 6.56 0 0 1 1.912 4.629c-.004 3.61-2.949 6.55-6.554 6.55m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+      </button>
+
+      <button class="social-btn" aria-label="Compartir por Telegram">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906q-1.168.486-4.666 2.01c-.56.223-.845.443-.854.661-.015.367.447.511.447.511l1.196.372 2.8-1.746c.15-.1.314-.047.204.06L4.711 9.804l-.199 1.942c.032.227.142.343.243.435l.939-.91 1.965 1.452c.361.2.622.1.714-.23a23 23 0 0 0 1.635-7.712c-.007-.403-.223-.55-.54-.525q-.185.016-.79.26"/>
+        </svg>
+      </button>
+
+      <button class="social-btn" aria-label="Compartir por Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383z"/>
+        </svg>
+      </button>
+    </div>
+
+    <hr class="divider">
+
+    <div class="theme-control">
+      <span id="theme-label">Modo Oscuro</span>
+      <label class="switch" for="dark-mode-toggle">
+        <input type="checkbox" id="dark-mode-toggle" aria-labelledby="theme-label">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <a href="https://tudominio.com/landing-info" class="promo-btn" target="_blank" rel="noopener">
+      Quiero mi Phygital
+    </a>
+  </dialog>
+
+</body>
+</html>

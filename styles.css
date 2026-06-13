@@ -1,0 +1,17 @@
+:root {
+  /* Paleta de colores requerida */
+  --main-clr: tomato;
+  --light-clr: #ffffff;
+  --dark-clr: #000000;
+
+  /* Configuración nativa para soportar ambos esquemas */
+  color-scheme: light dark;
+}
+
+/* Aplicación del color dinámico en el Dialog */
+dialog {
+  background-color: light-dark(var(--light-clr), var(--dark-clr));
+  color: light-dark(var(--dark-clr), var(--light-clr));
+  /* Transición suave para el cambio de modo */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
